@@ -1,0 +1,90 @@
+slots:
+  location:
+    type: text
+  cuisine:
+    type: text
+  budget: 
+    type: text
+  emailID: 
+    type: text
+
+entities:
+- location
+- cuisine
+- budget
+- emailID
+
+intents:
+ - greet
+ - affirm
+ - deny
+ - goodbye
+ - thankyou
+ - restaurant_search
+ - ask_email
+
+templates:
+  utter_greet:
+    - "hey there! How may i help you"
+    - "Hi, How can I help you!"
+    - "Hey, How is it going. How May I help you Today"
+  utter_goodbye:
+    - "goodbye :("
+    - "Bye-bye"
+  utter_default:
+    - "default message"
+  utter_ask_cuisine: 
+    - text: "what kind of cuisine would you like?"
+      buttons:
+      - title: "Chinese"
+        payload: "Chinese"
+      - title: "Italian"
+        payload: "Italian"
+      - title: "South Indian"
+        payload: "South Indian"
+      - title: "North Indian"
+        payload: "North Indian"
+      - title: "Mexican"
+        payload: "Mexican"
+      - title: "American"
+        payload: "American"
+  utter_ask_budget:
+    - text: "What is your budget?"
+      buttons: 
+      - title: "Lesser than Rs. 300"
+        payload: "Lesser than Rs. 300"
+      - title: "Rs. 300 to 700"
+        payload: "Rs. 300 to 700"
+      - title: "More than 700"
+        payload: "More than 700"
+  utter_ask_email: 
+    - text: "Would you like to receive top 10 restaurants on your Email?"
+      buttons: 
+      - title: "Yes, Please enter your Email ID..."
+        payload: "Yes, Please enter your Email ID..."
+      - title: "No, Thank you"
+        payload: "No, Thank you"
+  utter_ask_howcanhelp:
+    - "how can I help you?"
+  utter_ask_location:
+    - "In what location?"
+  utter_thankyou : 
+    - "Thank you : )"
+    - "Thank you! May I help you with something else?"
+  utter_mail_sent :
+    - "We have sent the mail. May I help you with something else?"
+
+actions:
+- utter_greet
+- utter_goodbye
+- utter_default
+- utter_ask_howcanhelp
+- utter_ask_location
+- utter_ask_cuisine
+- utter_ask_email
+- utter_ask_budget
+- actions.ActionSearchRestaurants
+- actions.ActionEmail
+- utter_thankyou
+- utter_mail_sent
+- actions.CheckLocation

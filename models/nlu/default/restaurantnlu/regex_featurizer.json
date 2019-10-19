@@ -1,0 +1,22 @@
+[
+    {
+        "name": "emailID",
+        "pattern": "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+    },
+    {
+        "name": "greet",
+        "pattern": "Hello[^\\s]*"
+    },
+    {
+        "name": "greet",
+        "pattern": "Hi[^\\s]*"
+    },
+    {
+        "name": "greet",
+        "pattern": "hey[^\\s]*"
+    },
+    {
+        "name": "zipcode",
+        "pattern": "[0-9]{5}"
+    }
+]
