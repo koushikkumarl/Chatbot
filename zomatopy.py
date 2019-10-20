@@ -217,7 +217,7 @@ class Zomato:
         return restaurant_details
 
 
-    def restaurant_search(self, query="", latitude="", longitude="", cuisines="", limit=5):
+    def restaurant_search(self, query="", latitude="", longitude="", cuisines="", limit=1000):
         """
         Takes either query, latitude and longitude or cuisine as input.
         Returns a list of Restaurant IDs.
@@ -241,7 +241,7 @@ class Zomato:
         r = (requests.get(base_url + "locations?query=" + str(query) + "&count=" + str(limit), headers=headers).content).decode("utf-8")
         return r
 
-    def restaurant_search_by_keyword(self, query="", cuisines="", limit=5):
+    def restaurant_search_by_keyword(self, query="", cuisines="", limit=1000):
         """
         Takes either query, latitude and longitude or cuisine as input.
         Returns a list of Restaurant IDs.

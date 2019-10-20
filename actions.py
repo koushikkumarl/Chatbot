@@ -28,34 +28,38 @@ class ActionSearchRestaurants(Action):
 	def run(self, dispatcher, tracker, domain):
 		config={ "user_key":"e14a62ecced714c4f35c540a12b6d345"}
 		zomato = zomatopy.initialize_app(config)
-		loc = tracker.get_slot('location')
-		cuisine = tracker.get_slot('cuisine')
-        cost = tracker.get_slot('budget')
+		loc = tracker.get_slot('location').lower()
+		cuisine = tracker.get_slot('cuisine').lower()
+		cost = tracker.get_slot('budget').lower()
 		location_detail=zomato.get_location(loc, 1)
 		d1 = json.loads(location_detail)
 		lat=d1["location_suggestions"][0]["latitude"]
 		lon=d1["location_suggestions"][0]["longitude"]
-		cuisines_dict={'Chinese':25,'Mexican':73,'Italian':55,'American':1,'South Indian':85,'North Indian':50}
-        budget_dict={'Low':300,'Medium':500,'High':700}
-		results=zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 5)
+		cuisines_dict={'chinese':25,'mexican':73,'italian':55,'american':1,'south indian':85,'north indian':50}
+		results=zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 1000)
 		d = json.loads(results)
-		response=""          
+		response="" 
+		numOfRestaurants = 0         
 		if d['results_found'] == 0:
-			response= "no results"
+			response= "Sorry, we did not find any restaurant with mentioned criteria."
 		else:			
-			for restaurant in d['restaurants']:
-				response=response+ "Found "+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " is rated " + restaurant['restaurant']['user_rating']['aggregate_rating'] + " with an Avg cost for Two is " + str(restaurant['restaurant']['average_cost_for_two']) +"\n"
-		
-                if(cost.contains('Low')): 
-                    if(restaurant['restaurant']['average_cost_for_two'] < 300):
-                        df_low.add(restaurant)
-                else if(cost.contains('Medium')):
-                    if(300 < restaurant['restaurant']['average_cost_for_two'] < 700):
-                        df_medium.add(restaurant)
-                else:
-                    if(restaurant['restaurant']['average_cost_for_two'] > 700):
-                        df_high.add(restaurant)
-		dispatcher.utter_message("-----"+response)
+			for restaurant in sorted(d['restaurants'],reverse = True, key = lambda sort_rating : sort_rating['restaurant']['user_rating']['aggregate_rating']):
+				if(('low' in cost) and (restaurant['restaurant']['average_cost_for_two'] < 300) and (numOfRestaurants <= 5)):
+					response=response+ "Found "+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " is rated " + restaurant['restaurant']['user_rating']['aggregate_rating'] + " with an Avg cost for Two as " + str(restaurant['restaurant']['average_cost_for_two']) +"\n"
+					numOfRestaurants += 1
+				elif(('mid' in cost) and (300 <= restaurant['restaurant']['average_cost_for_two'] < 700)  and (numOfRestaurants <= 5)):
+					response=response+ "Found "+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " is rated " + restaurant['restaurant']['user_rating']['aggregate_rating'] + " with an Avg cost for Two as " + str(restaurant['restaurant']['average_cost_for_two']) +"\n"
+					numOfRestaurants += 1
+				elif(('high' in cost) and (restaurant['restaurant']['average_cost_for_two'] >= 700)  and (numOfRestaurants <= 5)):
+					response=response+ "Found "+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " is rated " + restaurant['restaurant']['user_rating']['aggregate_rating'] + " with an Avg cost for Two as " + str(restaurant['restaurant']['average_cost_for_two']) +"\n"
+					numOfRestaurants += 1
+		if(numOfRestaurants == 0):
+			response= "Sorry, we did not find any restaurant with mentioned criteria."
+			dispatcher.utter_message("***" + response + "***")
+		elif(0 < numOfRestaurants <=5):
+			dispatcher.utter_message("*** Found below restaurants as per your search criteria ***")
+			distatcher.utter_message(response)
+
 		return [SlotSet('location',loc)]
 
 class ActionEmail(Action): 

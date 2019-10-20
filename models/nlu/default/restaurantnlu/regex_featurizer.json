@@ -9,7 +9,7 @@
     },
     {
         "name": "greet",
-        "pattern": "Hi[^\\s]*"
+        "pattern": "Hi [^\\s]*"
     },
     {
         "name": "greet",

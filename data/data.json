@@ -19,7 +19,7 @@
       },
       {
         "name": "greet",
-        "pattern": "Hi[^\\s]*"
+        "pattern": "Hi [^\\s]*"
       }
     ],
     "entity_synonyms": [
@@ -648,222 +648,6 @@
         ]
       },
       {
-        "text": "price is between 300 and 500",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 17,
-            "end": 21,
-            "value": "300 ",
-            "entity": "budget"
-          },
-          {
-            "start": 25,
-            "end": 28,
-            "value": "500",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "price less than 300",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 16,
-            "end": 19,
-            "value": "300",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "price greater than 700",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 19,
-            "end": 22,
-            "value": "700",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "budget less than 300",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 17,
-            "end": 20,
-            "value": "300",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "budget greater than 700",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 20,
-            "end": 23,
-            "value": "700",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "budget between 300 700",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 15,
-            "end": 19,
-            "value": "300 ",
-            "entity": "budget"
-          },
-          {
-            "start": 19,
-            "end": 22,
-            "value": "700",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "Lesser than Rs. 300",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 16,
-            "end": 19,
-            "value": "300",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "Rs. 300 to 700",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 4,
-            "end": 8,
-            "value": "300 ",
-            "entity": "budget"
-          },
-          {
-            "start": 11,
-            "end": 14,
-            "value": "700",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "More than 700",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 10,
-            "end": 13,
-            "value": "700",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "Rs 300",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 3,
-            "end": 6,
-            "value": "300",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "Rs.300",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 3,
-            "end": 6,
-            "value": "300",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "Rupees 300 /-",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 7,
-            "end": 11,
-            "value": "300 ",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "800/-",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 0,
-            "end": 3,
-            "value": "800",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "range of Rs. 300 to Rs. 500",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 13,
-            "end": 17,
-            "value": "300 ",
-            "entity": "budget"
-          },
-          {
-            "start": 24,
-            "end": 27,
-            "value": "500",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "> 300",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 2,
-            "end": 5,
-            "value": "300",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
-        "text": "< 500",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 2,
-            "end": 5,
-            "value": "500",
-            "entity": "budget"
-          }
-        ]
-      },
-      {
         "text": "Email is koushik.kumar@gmail.com",
         "intent": "ask_email",
         "entities": [
@@ -884,36 +668,6 @@
             "end": 29,
             "value": "asdf@gmail.com",
             "entity": "emailID"
-          }
-        ]
-      },
-      {
-        "text": "Show American cuisine in Delhi between range 300 and 500",
-        "intent": "restaurant_search",
-        "entities": [
-          {
-            "start": 5,
-            "end": 14,
-            "value": "American ",
-            "entity": "cuisine"
-          },
-          {
-            "start": 25,
-            "end": 31,
-            "value": "Delhi ",
-            "entity": "location"
-          },
-          {
-            "start": 45,
-            "end": 49,
-            "value": "300 ",
-            "entity": "budget"
-          },
-          {
-            "start": 53,
-            "end": 56,
-            "value": "500",
-            "entity": "budget"
           }
         ]
       },
@@ -1027,6 +781,78 @@
             "end": 18,
             "value": "abcd.efgh@bghf.com",
             "entity": "emailID"
+          }
+        ]
+      },
+      {
+        "text": "low",
+        "intent": "restaurant_search",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "low",
+            "entity": "budget"
+          }
+        ]
+      },
+      {
+        "text": "mid",
+        "intent": "restaurant_search",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "mid",
+            "entity": "budget"
+          }
+        ]
+      },
+      {
+        "text": "high",
+        "intent": "restaurant_search",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "high",
+            "entity": "budget"
+          }
+        ]
+      },
+      {
+        "text": "price is low",
+        "intent": "restaurant_search",
+        "entities": [
+          {
+            "start": 9,
+            "end": 12,
+            "value": "low",
+            "entity": "budget"
+          }
+        ]
+      },
+      {
+        "text": "price is mid",
+        "intent": "restaurant_search",
+        "entities": [
+          {
+            "start": 9,
+            "end": 12,
+            "value": "mid",
+            "entity": "budget"
+          }
+        ]
+      },
+      {
+        "text": "price is high",
+        "intent": "goodbye",
+        "entities": [
+          {
+            "start": 9,
+            "end": 13,
+            "value": "high",
+            "entity": "budget"
           }
         ]
       }

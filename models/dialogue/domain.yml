@@ -59,11 +59,11 @@ templates:
   utter_ask_budget:
   - buttons:
     - payload: Lesser than Rs. 300
-      title: Lesser than Rs. 300
+      title: Economical
     - payload: Rs. 300 to 700
-      title: Rs. 300 to 700
+      title: Mid range
     - payload: More than 700
-      title: More than 700
+      title: High range
     text: What is your budget?
   utter_ask_cuisine:
   - buttons:
