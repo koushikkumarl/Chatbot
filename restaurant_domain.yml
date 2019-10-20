@@ -23,6 +23,7 @@ intents:
  - restaurant_search
  - ask_email
 
+
 templates:
   utter_greet:
     - "hey there! How may i help you"
@@ -51,11 +52,11 @@ templates:
   utter_ask_budget:
     - text: "What is your budget?"
       buttons: 
-      - title: "Lesser than Rs. 300"
+      - title: "Economical"
         payload: "Lesser than Rs. 300"
-      - title: "Rs. 300 to 700"
+      - title: "Mid range"
         payload: "Rs. 300 to 700"
-      - title: "More than 700"
+      - title: "High range"
         payload: "More than 700"
   utter_ask_email: 
     - text: "Would you like to receive top 10 restaurants on your Email?"

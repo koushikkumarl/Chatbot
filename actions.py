@@ -30,11 +30,13 @@ class ActionSearchRestaurants(Action):
 		zomato = zomatopy.initialize_app(config)
 		loc = tracker.get_slot('location')
 		cuisine = tracker.get_slot('cuisine')
+        cost = tracker.get_slot('budget')
 		location_detail=zomato.get_location(loc, 1)
 		d1 = json.loads(location_detail)
 		lat=d1["location_suggestions"][0]["latitude"]
 		lon=d1["location_suggestions"][0]["longitude"]
 		cuisines_dict={'Chinese':25,'Mexican':73,'Italian':55,'American':1,'South Indian':85,'North Indian':50}
+        budget_dict={'Low':300,'Medium':500,'High':700}
 		results=zomato.restaurant_search("", lat, lon, str(cuisines_dict.get(cuisine)), 5)
 		d = json.loads(results)
 		response=""          
@@ -44,6 +46,15 @@ class ActionSearchRestaurants(Action):
 			for restaurant in d['restaurants']:
 				response=response+ "Found "+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+ " is rated " + restaurant['restaurant']['user_rating']['aggregate_rating'] + " with an Avg cost for Two is " + str(restaurant['restaurant']['average_cost_for_two']) +"\n"
 		
+                if(cost.contains('Low')): 
+                    if(restaurant['restaurant']['average_cost_for_two'] < 300):
+                        df_low.add(restaurant)
+                else if(cost.contains('Medium')):
+                    if(300 < restaurant['restaurant']['average_cost_for_two'] < 700):
+                        df_medium.add(restaurant)
+                else:
+                    if(restaurant['restaurant']['average_cost_for_two'] > 700):
+                        df_high.add(restaurant)
 		dispatcher.utter_message("-----"+response)
 		return [SlotSet('location',loc)]
 
@@ -73,7 +84,16 @@ class CheckLocation(Action):
         return 'action_CheckLocation'
         
     def run(self, dispatcher, tracker, domain):
-        tierCities = ['Delhi', 'Hyderabad', 'Pune', 'Chennai', 'Vizag']
+        tierCities = ['Bangalore', 'Chennai', 'Delhi', 'Hyderabad', 'Kolkata', 'Mumbai', 'Ahmedabad', 'Pune', 'Agra', 'Ajmer',
+        'Aligarh', 'Amravati', 'Amritsar', 'Asansol', 'Aurangabad', 'Bareilly', 'Belgaum', 'Bhavnagar', 'Bhiwandi', 'Bhopal', 'Bhubaneswar', 
+        'Bikaner', 'Bilaspur', 'Bokaro Steel City', 'Chandigarh', 'Coimbatore', 'Nagpur', 'Cuttack', 'Dehradun', 'Dhanbad', 'Bhilai', 'Durgapur', 
+        'Erode', 'Faridabad', 'Firozabad', 'Ghaziabad', 'Gorakhpur', 'Gulbarga', 'Guntur', 'Gwalior', 'Gurgaon', 'Guwahati', 'Hubli–Dharwad', 'Indore', 
+        'Jabalpur', 'Jaipur', 'Jalandhar', 'Jammu', 'Jamnagar', 'Jamshedpur', 'Jhansi', 'Jodhpur', 'Kakinada', 'Kannur', 'Kanpur', 'Kochi', 'Kottayam', 
+        'Kolhapur', 'Kollam', 'Kota', 'Kozhikode', 'Kurnool', 'Ludhiana', 'Lucknow', 'Madurai', 'Malappuram', 'Mathura', 'Goa', 'Mangalore', 'Meerut', 
+        'Moradabad', 'Mysore', 'Nanded', 'Nashik', 'Nellore', 'Noida', 'Palakkad', 'Patna', 'Pondicherry', 'Purulia', 'Allahabad', 'Raipur', 'Rajkot', 
+        'Rajahmundry', 'Ranchi', 'Rourkela', 'Salem', 'Sangli', 'Siliguri', 'Solapur', 'Srinagar', 'Thiruvananthapuram', 'Thrissur', 'Tiruchirappalli', 
+        'Tirupati', 'Tirunelveli', 'Tiruppur', 'Tiruvannamalai', 'Ujjain', 'Bijapur', 'Vadodara', 'Varanasi', 'Vasai-Virar City', 'Vijayawada', 'Vellore', 
+        'Warangal', 'Surat', 'Visakhapatnam']
         tierCitiesLower = [cities.lower() for cities in tierCities]
         userLocation = tracker.get_slot('location').lower()
         if userLocation not in tierCitiesLower: 
@@ -81,5 +101,5 @@ class CheckLocation(Action):
             dispatcher.utter_message("*** Thank you for your query ***")
             tracker.reset_slots()
         else:
-            dispatcher.utter_message("We operate in your area")
+            dispatcher.utter_message("We are active in your area!")
         
