@@ -56,3 +56,48 @@
     - utter_thankyou
 * restaurant_search
     - export
+
+## Generated Story 6265441544355662701
+* greet
+    - utter_greet
+* restaurant_search{"cuisine": "mexican", "location": "mumbai"}
+    - slot{"cuisine": "mexican"}
+    - slot{"location": "mumbai"}
+    - action_CheckLocation
+    - utter_ask_budget
+* restaurant_search{"budget": "high"}
+    - slot{"budget": "high"}
+    - action_restaurant
+    - slot{"location": "mumbai"}
+    - utter_ask_email
+* ask_email{"emailID": "sourav79dutta@gmail.com"}
+    - slot{"emailID": "sourav79dutta@gmail.com"}
+    - action_email
+    - utter_thankyou
+    - utter_thankyou
+    - export
+
+## Generated Story -5682536133709593215
+* greet
+    - utter_greet
+* restaurant_search{"cuisine": "indian", "location": "mumbai"}
+    - slot{"cuisine": "indian"}
+    - slot{"location": "mumbai"}
+    - action_CheckLocation
+    - utter_ask_budget
+* restaurant_search{"budget": "mid"}
+    - slot{"budget": "mid"}
+    - action_restaurant
+    - slot{"location": "mumbai"}
+    - utter_ask_cuisine
+* restaurant_search{"cuisine": "italian"}
+    - slot{"cuisine": "italian"}
+    - action_restaurant
+    - slot{"location": "mumbai"}
+    - utter_ask_email
+* ask_email{"emailID": "koushik.feb11@gmail.com"}
+    - slot{"emailID": "koushik.feb11@gmail.com"}
+    - action_email
+    - utter_thankyou
+    - export
+

@@ -230,7 +230,7 @@ class Zomato:
         return r#a = ast.literal_eval(r)
 
 
-    def get_location(self, query="", limit=5):
+    def get_location(self, query="", limit=1000):
         """
         Takes either query, latitude and longitude or cuisine as input.
         Returns a list of Restaurant IDs.
